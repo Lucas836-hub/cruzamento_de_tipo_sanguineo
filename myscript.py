@@ -1,6 +1,6 @@
-#criado por Lucas gabriel
-# github : github.com/Lucas836-hub
-# instagra : @lucas_git
+# Criado por : Lucas gabriel
+# github : https://github.com/Lucas836-hub/
+# instagram : @lucas_git
 
 # Ia Ib Iab i
 # Ia+ Ib+ Iab+ i+ # Ia- Ib- Iab- i-
