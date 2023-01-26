@@ -11,55 +11,119 @@ class run:
 		self.limp()
 
 		q=["Da mãe :","Do filho : ","Do pai : "]
-		quem=0 # de quem sera o resultado d teste
+		quem=None # de quem sera o resultado d teste
 		self.tip = [] # genomas que serao cruzados
 		self.matriz_resposta=[] #resposta final em formato de matriz
 		self.porc_tip=[] # porccentagem de cada genoma
 		c_ativo = False
+		self.pimt = False
+		
+		m=None
+		f=None
+		p=None
 
-		todos_tipos=[[["Ia", "Ia"],[ "Ia", "Ii"]],[["Ib", "Ib"], ["Ib", "Ii"]],[["Ia", "Ib"], ["Ib", "Ia"]],[["Ii", "Ii"], ["Ii", "Ii"]]]
+		todos_tipos=[[["Ia", "Ia"],[ "Ia", "Ii"]] \
+		,[["Ib", "Ib"], ["Ib", "Ii"]] \
+		,[["Ia", "Ib"]]\
+		,[["Ii", "Ii"]]]
 		# cromossomos dos tipos sanguineos
 
 		for c in range(0,3):
-			print(f"Qual tipo sanguineo \033[34m{q[c]}\033[m")
-			print("Digite :\n        1 - A\n        2 - B\n        3 - AB\n        4 - O\n        5 - Quero saber")
-			t=self.opcao(1,5)
+			print(f"Qual tipo sanguineo \033[94m{q[c]}\033[m")
+			print("Digite :\n        1 - A\n        2 - B\n        3 - AB\n        4 - O\n",end="",flush=True)
+			
+			if quem == None:
+				print("        5 - Quero saber")
+				t=self.opcao(1,5)
+			else:
+				t=self.opcao(1,4)
 
 			if t == 5 or t == 4 or t == 3:
 				g=1
 			else:
-				print("\033[34mDigite :\n        1 - para homozigoto (alelos iguais)\n        2 - para heterozigoto (alelos diferentes)\n        3 - para não sei\033[m")
+				print("\033[94mDigite :\n        1 - para homozigoto (alelos iguais)\n        2 - para heterozigoto (alelos diferentes)\n        3 - para não sei\033[m")
 				g=self.opcao(1,3)
 			if t == 5:
 				quem=c
 			else:
 				if g == 3:
 					c_ativo=True
-					self.tip.append(todos_tipos[t - 1][0])
+					self.tip.append(todos_tipos[t - 1])
+					#print("todos ",todos_tipos[t - 1])
 				else:
-					self.tip.append(todos_tipos[t-1][g-1])
-		self.cruzamento()
-		print("-+"*40)
-
-		print(f"  |  {self.tip[0][0]}  |  {self.tip[0][1]}  |\n"
-			  f"{self.tip[1][0]}| {self.matriz_resposta[0]} | {self.matriz_resposta[2]} |\n"
-			  f"{self.tip[1][1]}| {self.matriz_resposta[1]} | {self.matriz_resposta[3]} |")
-
-		for pr in self.porc_tip :
-			print(f"\nTipo {self.tipo_de_sangue(pr[0])}, Alelos = {pr[0]} , Provabilidade de = {pr[1]} % ")
-
-		if c_ativo:
-
-			self.tip.append(todos_tipos[t - 1][1])
-
-			print("-+" * 40)
-
-			print(f"  |  {self.tip[0][0]}  |  {self.tip[0][1]}  |\n"
-				  f"{self.tip[1][0]}| {self.matriz_resposta[0]} | {self.matriz_resposta[2]} |\n"
-				  f"{self.tip[1][1]}| {self.matriz_resposta[1]} | {self.matriz_resposta[3]} |")
-
-			for pr in self.porc_tip:
-				print(f"\nTipo {self.tipo_de_sangue(pr[0])}, Alelos = {pr[0]} , Provabilidade de = {pr[1]} % ")
+					tem=[""]
+					tem.append(todos_tipos[t-1][g-1])
+					self.tip.append(tem)
+				#	print("todos ",todos_tipos[t-1][g-1])
+					
+					
+	#	print(f"tip {self.tip} \n len {len(self.tip)} 0 {self.tip[0]} 1 {self.tip[1]} \n 00 {self.tip[0][0]} {len(self.tip[0][0])} 10 {self.tip[1][0]}")
+		self.limp()
+		for pa in range(0,len(self.tip[0])):
+			if self.tip[0][pa] == "":
+				continue
+			else:
+				if quem == None:
+					u=2
+				else:
+					u=1
+				for pb in range(0,len(self.tip[u])):
+					if self.tip[u][pb] == "":
+						continue
+					cz=self.cruzamento(self.tip[0][pa],self.tip[u][pb]) 
+					
+				list_temp=[]
+				if quem ==1:
+						print("\033[94mRESULTADO\033[m".center(60))
+						print(f"\nMãe tipo sanguineo : {self.tipo_de_sangue(self.tip[0][pa][0]+self.tip[0][pa][1])} Alelos : {self.tip[0][pa][0]}{self.tip[0][pa][1]}")
+						print(f"Pai tipo sanguineo : {self.tipo_de_sangue(self.tip[1][pb][0]+self.tip[1][pb][1])} Alelos : {self.tip[1][pb][0]}{self.tip[1][pb][1]}\n")
+						print("POSSIVEIS TIPOS SANGUINEOS DO FILHO :\n")
+				
+				if quem ==2:
+						print("\033[94mRESULTADO\033[m".center(60))
+						print(f"\nMãe tipo sanguineo : {self.tipo_de_sangue(self.tip[0][pa][0]+self.tip[0][pa][1])} Alelos : {self.tip[0][pa][0]}{self.tip[0][pa][1]}")
+						print(f"Filho tipo sanguineo : {self.tipo_de_sangue(self.tip[1][pb][0]+self.tip[1][pb][1])} Alelos : {self.tip[1][pb][0]}{self.tip[1][pb][1]}\n")
+						print("POSSIVEIS TIPOS SANGUINEOS DO PAI :\n")
+						
+				if quem ==None:
+						print("\033[94mRESULTADO\033[m".center(60))
+						print(f"\n\033[96mMãe tipo sanguineo : {self.tipo_de_sangue(self.tip[0][pa][0]+self.tip[0][pa][1])} Alelos : {self.tip[0][pa][0]}{self.tip[0][pa][1]}")
+						print(f"Filho tipo sanguineo : {self.tipo_de_sangue(self.tip[1][pb][0]+self.tip[1][pb][1])} Alelos : {self.tip[1][pb][0]}{self.tip[1][pb][1]}")
+						print(f"Pai tipo sanguineo : {self.tipo_de_sangue(self.tip[2][pb][0]+self.tip[2][pb][1])} Alelos : {self.tip[2][pb][0]}{self.tip[2][pb][1]}\033[m\n")
+						
+						print("POSSIVEIS TIPOS SANGUINEOS DO Filho :\n")
+						
+				for hj in range(0,len(cz)):
+					
+				#	print(hj)
+				#	print(f"\033[31mresultado do cruzamento {cz}\033[m")
+					if not self.tipo_de_sangue(cz[hj]) in list_temp:
+						print(f"Alelos {cz[hj]} = Tipo {self.tipo_de_sangue(cz[hj])} com provabilidade de {self.porcento(cz,cz[hj])}%")
+						list_temp.append(self.tipo_de_sangue(cz[hj]))
+				
+				# DIZ SE E O PAI	
+				if quem == None:
+					dfg=False
+					try:
+						if str(self.tip[1][1][0]+self.tip[1][1][1]) in cz :
+							dfg=True
+					except:
+						pass
+					try:
+						if str(self.tip[1][0][0]+self.tip[1][0][1]) in cz :
+							dfg=True
+					except:
+						pass
+						
+					if dfg:
+						print("\n\033[92mHá provabilidade do pai ser o pai dele\033[m")
+					else :
+						print("\n\033[93mNão há provabilidade do pai ser o pai dele\033[m")
+						print(cz)
+						print(self.tip[1][0])
+						print(self.tip[1][1])
+						
+		
 
 	def tipo_de_sangue(self,par):
 
@@ -80,42 +144,54 @@ class run:
 			return "AB"
 
 
+	def plataforma(self):
+		import platform
+		return platform.system()
+		
 	def limp(self):
-		try:
+		s=self.plataforma()
+		
+		if s == "Linux" :
 			os.system("clear")
-		except:
+			
+		if s == "Windows" :
 			os.system("cls")
+			
+		if s == "Darwin" :
+			os.system("clear")
 
-
-	def cruzamento(self):
+	def txt_p(self,txt):
+		if self.pimt :
+			print(txt)
+			
+			
+	def cruzamento(self,a=[],b=[]):
 		m_cruzadas=[]
-		porc = ["IaIa", "IaIb", "IaIi", "IbIi", "IbIb", "IiIi"]#"IbIa","IiIa","IiIb"]
-		nm=[0,0,0,0,0,0,0,0,0]
+		
+	#	print(f"\033[33m{a} |  {b}  lista recebida\033[m")
 
-		for a in self.tip[0]: # monta a matriz resposta
-			for b in self.tip[1]:
-				ctpm=a+b
-
-				if ctpm == "IbIa":
-					ctpm = "IaIb"
-				if ctpm == "IiIa":
-					ctpm = "IaIi"
-				if ctpm == "IiIb":
-					ctpm = "IbIi"
-				#ctpm.replace("IbIa","IaIb")
-				#ctpm.replace("IaIi","IiIa")
-				#ctpm.replace("IiIb","IbIi")
+		for c in range(0,len(a)):
+			for d in range(0,len(b)):
+				ctpm=str(f"{a[c]}{b[d]}")
 				m_cruzadas.append(ctpm)
-				self.matriz_resposta.append(a+b)
-				l=int(porc.index(ctpm))
-				nm[l]+=1
-
-		for m in range(0,len(nm)):# m,n in nm,porc:# monta os resultados
-			if nm[m] == 0:
-				pass
-			else:
-				fgh=(1/(4/nm[m]))*100
-				self.porc_tip.append([porc[m],fgh])
+			#	print(f"\033[35m   {a[c]} + {b[d]} alelos ctpm {ctpm}\033[m")
+	
+	#	print(f"\033[33mresul cruzada {m_cruzadas} \033[m")		
+		return m_cruzadas
+		
+	def porcento(self,lis,q):
+		#recebe a lista e uma vareavel e retorna em porcentagem a sua incidencia
+		c=0
+		kl=list(q)
+		lk=kl[2]+kl[3]+kl[0]+kl[1]
+		for m in range(0,len(lis)):
+			if lis[m]==q or lis[m]==lk:
+				c+=1				
+		try:
+			g=c*100/4
+		except ZeroDivisionError:
+			g=0
+		return g
 
 
 
