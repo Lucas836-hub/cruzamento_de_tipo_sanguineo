@@ -5,9 +5,17 @@
 # Ia Ib Iab i
 # Ia+ Ib+ Iab+ i+ # Ia- Ib- Iab- i-
 import os
+import update_file # CHAMANDO O ATUALIZADOR
 
 class run:
 	def __init__(self):
+
+		# VERIFICANDO ATUALIZACOES
+		if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
+			self.titulo("ATUALIZANDO")
+			# ATUALIZANDO O SCRIPT LOCAL
+			update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
+
 		self.limp()
 
 		q=["Da mãe :","Do filho : ","Do pai : "]
@@ -17,15 +25,14 @@ class run:
 		self.porc_tip=[] # porccentagem de cada genoma
 		c_ativo = False
 		self.pimt = False
-		
-		m=None
-		f=None
-		p=None
 
 		todos_tipos=[[["Ia", "Ia"],[ "Ia", "Ii"]] \
 		,[["Ib", "Ib"], ["Ib", "Ii"]] \
 		,[["Ia", "Ib"]]\
 		,[["Ii", "Ii"]]]
+
+		rh=[[["R","r"],["R","R"]],[[],["r","r"]]]
+		rh_resp=[]
 		# cromossomos dos tipos sanguineos
 
 		for c in range(0,3):
@@ -119,9 +126,9 @@ class run:
 						print("\n\033[92mHá provabilidade do pai ser o pai dele\033[m")
 					else :
 						print("\n\033[93mNão há provabilidade do pai ser o pai dele\033[m")
-						print(cz)
-						print(self.tip[1][0])
-						print(self.tip[1][1])
+						#print(cz)
+						#print(self.tip[1][0])
+						#print(self.tip[1][1])
 						
 		
 
