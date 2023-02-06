@@ -12,7 +12,6 @@ class run:
 
 		# VERIFICANDO ATUALIZACOES
 		if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
-			self.titulo("ATUALIZANDO")
 			# ATUALIZANDO O SCRIPT LOCAL
 			update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
 
