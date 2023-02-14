@@ -20,4 +20,4 @@ Obviamento ignorando o efeito bombaim / falso O saiba mais em https://mundoeduca
      
 ## Execucao 
 
-     python3 myscript.py
+     python3 myscript.py 
