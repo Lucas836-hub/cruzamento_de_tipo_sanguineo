@@ -11,9 +11,15 @@ class run:
 	def __init__(self):
 
 		# VERIFICANDO ATUALIZACOES
-		if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
-			# ATUALIZANDO O SCRIPT LOCAL
-			update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
+		try:
+			if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
+				# ATUALIZANDO O SCRIPT LOCAL
+				update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
+				print("\033[32mvai atualizar\033[m")
+			else:
+				print("\033[31mnao vai atualizar\033[m")
+		except:
+			pass
 
 		self.limp()
 
