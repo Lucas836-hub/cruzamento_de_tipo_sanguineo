@@ -14,10 +14,18 @@ class run:
 		try:
 			if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
 				# ATUALIZANDO O SCRIPT LOCAL
-				update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
-				print("\033[32mvai atualizar\033[m")
-			else:
-				print("\033[31mnao vai atualizar\033[m")
+				print("\033[93mATENÇÃO ATUALIZAÇÃO DETECTADA\033[m".center(60))
+				
+				while True:
+					sn=input("Você deseja atualizar ? S/N : ").strip().lower().replace("sim", "s").replace("ss", "s").replace(
+			"nao", "n").replace("não", "n").replace("nn", "n")
+					if sn =="n" or sn == "s":
+						break
+					else:
+						print("resposta invalida !!!")
+				if sn == "s":		
+					update_file.atualizar("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo")
+					update_file.instalador_biblioteca()
 		except:
 			pass
 
