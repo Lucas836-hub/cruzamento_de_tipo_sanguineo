@@ -1,4 +1,4 @@
-# <div align="center"> *cruzamento_de_tipo_sanguineo* </div>
+# <div align="center"> *cruzamento de tipo sanguineo* </div>
 
 
 
@@ -10,7 +10,7 @@ Faz o cruzamento de tipos sanguineos  mostrando os calculos e a porcentagem
 No qual ele pode dizer se os serem que estam sendo testados podem ou nao serem parentes proximos (Pai, Mae, filhos)
 Obviamento ignorando o efeito bombaim / falso O saiba mais em https://mundoeducacao.uol.com.br/biologia/efeito-bombaimfalso-o.htm
 
-## INSTALACAO
+## INSTALAÇÃO 
 
      git clone https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo
      
@@ -18,6 +18,10 @@ Obviamento ignorando o efeito bombaim / falso O saiba mais em https://mundoeduca
 
      python3 -m pip install -r requirements.txt
      
-## Execucao 
+## Execução
 
      python3 myscript.py 
+     
+<div align="center">
+<img src="https://user-images.githubusercontent.com/70550900/230795895-31eb34d8-2446-488c-bc9b-fa4654c61eee.png" width="700px" />
+</div>
