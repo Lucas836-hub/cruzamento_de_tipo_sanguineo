@@ -11,6 +11,7 @@ class run:
 	def __init__(self):
 
 		# VERIFICANDO ATUALIZACOES
+		print("VERIFICANDO ATUALIZACOES ....")
 		try:
 			if update_file.check_atualizacao("https://github.com/Lucas836-hub/cruzamento_de_tipo_sanguineo"):
 				# ATUALIZANDO O SCRIPT LOCAL
